@@ -40,13 +40,10 @@ const buildReadme_01 = ({ title, description }) =>
 ${description}
 `
 
-const buildReadme_02 = ([{ toc }]) =>
-    `
-## Table of contents
-${toc[0]}
-${toc[1]}
-`
-
+const buildReadme_02 = (tocs) => {
+    const tableOfContents = tocs.map(t => `${t.toc} <br />`).join('');
+    return `## Table of contents\n${tableOfContents}`
+}
 const init = async () => {
     const input1 = await promtUser_01()
     const inputToc = [await promtUser_02()]
