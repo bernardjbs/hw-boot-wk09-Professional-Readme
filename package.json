@@ -1,0 +1,23 @@
+{
+  "name": "hw-boot-wk09-professional-readme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "readme.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bernardjbs/hw-boot-wk09-Professional-Readme.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bernardjbs/hw-boot-wk09-Professional-Readme/issues"
+  },
+  "homepage": "https://github.com/bernardjbs/hw-boot-wk09-Professional-Readme#readme",
+  "dependencies": {
+    "inquirer": "^8.2.2"
+  }
+}
