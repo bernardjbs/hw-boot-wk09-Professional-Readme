@@ -33,6 +33,42 @@ const promtUser_02 = () => {
     ])
 }
 
+const promtUser_03 = () => {
+    return inquirer.prompt([
+        {
+            type: "input", 
+            message: "Enter installation instructions",
+            name: "installation"
+        }, 
+        {
+            type: "input", 
+            message: "Enter usage",
+            name: "usage"
+        },
+        {
+            type: "input", 
+            message: "Enter License",
+            name: "license"
+        }, 
+        {
+            type: "input", 
+            message: "Enter Contribution",
+            name: "contributing"
+        }, 
+        {
+            type: "input", 
+            message: "Enter Tests",
+            name: "tests"
+        }, 
+        {
+            type: "input", 
+            message: "Enter Questions",
+            name: "questions"
+        }, 
+        
+    ])
+}
+
 const buildReadme_01 = ({ title, description }) =>
     `
 # ${title}
@@ -44,19 +80,39 @@ const buildReadme_02 = (tocs) => {
     const tableOfContents = tocs.map(t => `${t.toc} <br />`).join('');
     return `## Table of contents\n${tableOfContents}`
 }
+
+const buildReadme_03 = ({installation, usage, license, contributing, tests, questions}) => 
+`
+## Installation
+${installation}
+
+## Usage
+${usage}
+
+## License
+${license}
+
+## Contributing
+${contributing}
+
+## Tests
+${tests}
+
+## Questions
+${questions}
+`
 const init = async () => {
     const input1 = await promtUser_01()
     const inputToc = [await promtUser_02()]
-
-    console.log(inputToc);
-
     while (inputToc.slice(-1)[0].confirmTOC == true) {
         const inputNextToc = await promtUser_02()
         inputToc.push(inputNextToc);
-        console.log(inputToc);
     }
 
     fs.writeFileSync("README.md", buildReadme_01(input1));
     fs.appendFileSync("README.md", buildReadme_02(inputToc));
+
+    const input3 = await promtUser_03()
+    fs.appendFileSync("README.md", buildReadme_03(input3));
 }
 init();
