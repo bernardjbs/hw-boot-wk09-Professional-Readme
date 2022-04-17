@@ -1,9 +1,11 @@
+const buildReadme = (input) =>
+{
+return `
 
-
-# Professional readme
+# ${input.title}
 
 ## Description
-This is a professional readme generator
+${input.description}
 
 ## Table of Contents
 
@@ -19,28 +21,27 @@ If your README is long, add a table of contents to make it easy for users to fin
 
 
 ## Installation
-some steps how to install 
+${input.installation}
 
 ## Usage
-some instructions and examples how to use... 
+${input.usage}
 
 
 ## License
-BSD-2-Clause
+${input.license}
 
 ## Credits
-Bernard - bernard@github.com
+${input.credits}
 
 ## Tests
-some testing
+${input.tests}
 ---
 
 ## Badges
 
 ![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
 
-## Tests
+`;
+}
 
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.    
-
-
+module.exports = { buildReadme };
