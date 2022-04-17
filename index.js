@@ -2,7 +2,8 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 const readme = require("./assets/readme")
 
-const promtUser = () => {
+// Prompt user part 1: prompt for title and description
+const promtUser_part1 = () => {
     return inquirer.prompt([
         {
             name: "title",
@@ -14,11 +15,28 @@ const promtUser = () => {
             type: "input",
             message: "Enter Description"
         },
+    ])
+}
+
+// Prompt user part 2: Installation
+const promtUser_part2 = () => {
+    return inquirer.prompt([
         {
             name: "installation",
             type: "input", 
             message: "Please enter the steps to install your project: [PROMPT STEPS]"
         }, 
+        {
+            type: "confirm",
+            message: "Add more instruction?",
+            name: "moreInstruction",
+        },
+
+    ])
+}
+
+const promtUser_part3 = () => {
+    return inquirer.prompt([
         {
             name: "usage",
             type: "input", 
@@ -46,16 +64,30 @@ const promtUser = () => {
             name: "tests", 
             type: "input", 
             message: "Please enter testing: "
-        }, 
+        }        
     ])
 }
 
+
 const init = async () => {
-    const input = await promtUser()
-    const generateReadme = readme.buildReadme(input)
-    fs.writeFileSync("README.md", generateReadme);
+    const input_01 = await promtUser_part1();
+    const input_02 = [await promtUser_part2()];
+    while(input_02.slice(-1)[0].moreInstruction == true) {
+        const inputNextIns = await promtUser_part2();
+        input_02.push(inputNextIns);
+    }
+    const input_03 = await promtUser_part3();
+    
+    const generateReadme_part1 = readme.buildReadme_part1(input_01);
+    const generateReadme_part2 = readme.buildReadme_part2(input_02);
+    const generateReadme_part3 = readme.buildReadme_part3(input_03);
+
+    fs.writeFileSync("README.md", generateReadme_part1);
+    fs.appendFileSync("README.md", generateReadme_part2);
+    fs.appendFileSync("README.md", generateReadme_part3);
 }
 init();
+
 
 
 

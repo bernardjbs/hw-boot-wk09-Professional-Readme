@@ -1,4 +1,6 @@
-const buildReadme = (input) =>
+const inquirer = require("inquirer");
+
+const buildReadme_part1 = (input) =>
 {
 return `
 
@@ -8,24 +10,26 @@ return `
 ${input.description}
 
 ## Table of Contents
-
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
-
 - [Description](#description)
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
 - [Credits](#credits)
 - [Tests](#tests)
+`
+}
 
+const buildReadme_part2 = (installations) => {
+    console.log(installations);
+    const ins = installations.map(i => `${i.installation} <br />`).join('');
+    // const tableOfContents = tocs.map(t => `${t.moreInstruction} <br />`).join('');
+    return `## Instructions\n${ins}`;
+}
 
-## Installation
-${input.installation}
-
+const buildReadme_part3 = (input) =>  {
+return `
 ## Usage
 ${input.usage}
-
 
 ## License
 ${input.license}
@@ -41,7 +45,6 @@ ${input.tests}
 
 ![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
 
-`;
+`
 }
-
-module.exports = { buildReadme };
+module.exports = { buildReadme_part1, buildReadme_part2, buildReadme_part3 };

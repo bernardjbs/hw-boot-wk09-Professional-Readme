@@ -1,35 +1,27 @@
 
 
-# Professional readme
+# Readme generator
 
 ## Description
 This is a professional readme generator
 
 ## Table of Contents
-
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
-
 - [Description](#description)
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
 - [Credits](#credits)
 - [Tests](#tests)
-
-
-## Installation
-some steps how to install 
-
+## Instructions
+step 1 <br />step 2 <br />step 3 <br />
 ## Usage
-some instructions and examples how to use... 
-
+some instructions
 
 ## License
-BSD-2-Clause
+GPL-3.0
 
 ## Credits
-Bernard - bernard@github.com
+bernard - www.github.com/bernardjbs
 
 ## Tests
 some testing
@@ -38,9 +30,4 @@ some testing
 ## Badges
 
 ![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
-
-## Tests
-
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.    
-
 
