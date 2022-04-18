@@ -92,5 +92,8 @@ Please enter your EMAIL address:
 An example of the command prompt questionaire filled: 
 ![Filled Prompt](./assets/images/readme_prompt.jpg)
 
+The generated README.md
+![Generated readme](./assets/images/readme.jpg)
+
 ## Link to deployment application
 https://github.com/bernardjbs/hw-boot-wk09-Professional-Readme

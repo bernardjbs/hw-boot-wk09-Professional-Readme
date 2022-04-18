@@ -81,7 +81,7 @@ Licensed under ${data.license}
 // Function to build credit string
 const buildCredit = (data_arr) => {
     const ins = data_arr.reverse().map(c => `${c.credit} <br />`).join('');
-    return `\n## Credit\n${ins}`;
+    return `\n## Credits\n${ins}`;
 };
 
 // Function to build testing string

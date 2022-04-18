@@ -30,7 +30,7 @@ Run index.js on node and follow the steps from the prompt command <br />![Image]
 Licensed under Apache 2.0
 
     
-## Credit
+## Credits
 John Smith - jsmith@readme.com <br />James Dean - jdean@hollywood.com <br />Donald Trump - dtrump@capitol.com <br />
     
 ## Tests
