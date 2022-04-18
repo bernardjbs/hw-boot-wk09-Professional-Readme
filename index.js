@@ -1,22 +1,6 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
-const readme = require("./assets/readme")
-
-// Prompt user part 1: prompt for title and description
-const getInputData01 = () => {
-    return inquirer.prompt([
-        {
-            name: "title",
-            type: "input",
-            message: "Enter Title"
-        },
-        {
-            name: "description",
-            type: "input",
-            message: "Enter Description"
-        },
-    ])
-}
+const readme = require("./assets/readme");
 
 const promptImg = () => {
     return inquirer.prompt([
@@ -25,9 +9,8 @@ const promptImg = () => {
             type: "input",
             message: "Please enter the file path of the image: "
         }
-    ])
-}
-
+    ]);
+};
 
 const confirmImg = () => {
     return inquirer.prompt([
@@ -36,8 +19,40 @@ const confirmImg = () => {
             type: "confirm",
             message: "Would you like to add an image?"
         }
-    ])
-}
+    ]);
+};
+
+// Prompt user part 1: prompt for title and description
+
+const promptTitle = () => {
+    return inquirer.prompt([
+        {
+            name: "title",
+            type: "input",
+            message: "Enter Title"
+        }
+    ]);
+};
+
+const promptDesc = () => {
+    return inquirer.prompt([
+        {
+            name: "description",
+            type: "input",
+            message: "Enter Description"
+        },
+    ]);
+};
+
+const promptInstallation = () => {
+    return inquirer.prompt([
+        {
+            name: "installation",
+            type: "input",
+            message: "Please enter the steps to install your project:"
+        }
+    ]);
+};
 
 const confirmInstallation = () => {
     return inquirer.prompt([
@@ -46,38 +61,48 @@ const confirmInstallation = () => {
             type: "confirm",
             message: "Add more installation instruction?"
         }
-    ])
-}
-const promtInstallation = () => {
-    return inquirer.prompt([
-        {
-            name: "installation",
-            type: "input",
-            message: "Please enter the steps to install your project: [PROMPT STEPS]"
-        }
-    ])
-}
+    ]);
+};
 
-const getInputData02 = () => {
+const promptUsage = () => {
     return inquirer.prompt([
         {
             name: "usage",
             type: "input",
-            message: "Please provide instructions and examples for use: [PROMPT STEPS - IMAGES]"
-        },
+            message: "Please provide instructions and examples for use:"
+        }
+    ]);
+};
+const confirmUsage = () => {
+    return inquirer.prompt([
+        {
+            name: "moreUsage",
+            type: "confirm",
+            message: "Add more usage instruction?"
+        }
+    ]);
+};
+
+const chooseLicense = async () => {
+    return inquirer.prompt([
         {
             name: "license",
             type: "list",
-            message: "Please choose a license for your project: ",
+            message: "Please choose a license for your project:",
             choices: [
                 "MIT",
-                "Apache-2.0",
-                "GPL-3.0",
-                "BSD-2-Clause",
-                "BSD-3-Clause",
-                "BSD-4-Clause"
+                "Apache 2.0",
+                "GPL 3.0",
+                "BSD 2 Clause",
+                "BSD 3 Clause",
+                "BSD 4 Clause"
             ]
         },
+    ]);
+};
+
+const promptCreditTest = async () => {
+    return inquirer.prompt([
         {
             name: "credits",
             type: "input",
@@ -88,15 +113,29 @@ const getInputData02 = () => {
             type: "input",
             message: "Please enter testing: "
         }
-    ])
+    ]);
 }
 
+const promptQuestions = async () => {
+    return inquirer.prompt([
+        {
+            name: "username", 
+            type: "input", 
+            message: "Please enter your github username:"
+        },
+        {
+            name: "email", 
+            type: "input",
+            message: "Please enter your email address:"
+        }
+    ]);
+}
 
 let installArr = [];
 const getInstallData = async () => {
 
     const installObj = {};
-    const promptInstallData = await promtInstallation();
+    const promptInstallData = await promptInstallation();
 
     const getImageConfirm = await confirmImg();
     if (getImageConfirm.addImage == true) {
@@ -104,7 +143,7 @@ const getInstallData = async () => {
         installObj.imgSrc = promptImgData.image;
     }
     else {
-        installObj.imgSrc = "";        
+        installObj.imgSrc = "";
     }
 
     const getInstallConfirm = await confirmInstallation();
@@ -116,17 +155,58 @@ const getInstallData = async () => {
     return installArr;
 }
 
+let usageArr = [];
+const getUsageData = async () => {
+
+    const usageObj = {};
+    const promptUsageData = await promptUsage();
+
+    const getImageConfirm = await confirmImg();
+    if (getImageConfirm.addImage == true) {
+        const promptImgData = await promptImg();
+        usageObj.imgSrc = promptImgData.image;
+    }
+    else {
+        usageObj.imgSrc = "";
+    }
+
+    const getUsageConfirm = await confirmUsage();
+    if (getUsageConfirm.moreUsage == true) {
+        await getUsageData();
+    }
+    usageObj.usage = promptUsageData.usage;
+    usageArr.push(usageObj);
+    return usageArr;
+}
+
 const init = async () => {
-    const input_01 = await getInputData01();
-    input_02_arr = await getInstallData();
-    const input_03 = await getInputData02();
+    const titleData = await promptTitle()
+    const descData = await promptDesc()
+    const installData_arr = await getInstallData();
+    const usageData_arr = await getUsageData();
+    const licenseData = await chooseLicense()
+    const creditTestData = await promptCreditTest()
+    const questionsData = await promptQuestions()
 
-    const generateReadme_part1 = readme.buildReadme_part1(input_01);
-    const generateReadme_part2 = readme.buildReadme_part2(input_02_arr);
-    const generateReadme_part3 = readme.buildReadme_part3(input_03);
+    const buildTitle = readme.buildTitle(titleData);
+    const buildLicenseBadge = readme.buildLicenseBadge(licenseData);
+    const buildDescription = readme.buildDescription(descData);
+    const buildInstallation = readme.buildInstallation(installData_arr); 
+    const buildUsage = readme.buildUsage(usageData_arr);
+    const buildLicense = readme.buildLicense(licenseData);
+    const buildCreditTest = readme.buildCreditTest(creditTestData);
+    const buildQuestions = readme.buildQuestions(questionsData);
 
-    fs.writeFileSync("README.md", generateReadme_part1);
-    fs.appendFileSync("README.md", generateReadme_part2);
-    fs.appendFileSync("README.md", generateReadme_part3);
+    let join = `
+    ${buildTitle}
+    ${buildLicenseBadge}
+    ${buildDescription}
+    ${buildInstallation}
+    ${buildUsage}
+    ${buildLicense}
+    ${buildCreditTest}
+    ${buildQuestions}
+    `;
+    fs.writeFileSync("README.md", join);
 }
 init();

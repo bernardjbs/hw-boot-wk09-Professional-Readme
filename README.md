@@ -1,9 +1,13 @@
 
+    
+# A readme generator
 
-# Readme generator
+    
+![License](https://img.shields.io/badge/License-BSD%202%20Clause-blue)
 
+    
 ## Description
-this is a professional readme generator
+This readme generator is cool and is pro!! 
 
 ## Table of Contents
 - [Description](#description)
@@ -12,23 +16,30 @@ this is a professional readme generator
 - [License](#license)
 - [Credits](#credits)
 - [Tests](#tests)
-## Instructions
-1 <br />![installation image](./assets/images/installation_01.jpg) <br /> <br />2 <br />![installation image](./assets/images/installation_02.jpg) <br /> <br />3 <br />![installation image](./assets/images/installation_03.jpg) <br /> <br />
+
+    
+## Installation
+step 1 <br />![Image](./assets/images/installation_01.jpg)<br /> <br />Step 2 <br /> <br />
+
+    
 ## Usage
-some usage instructions
-
+Usage 1 <br />![Image](./assets/images/usage_01.jpg) <br /> <br />
+    
 ## License
-BSD-2-Clause
+Licensed under BSD 2 Clause
 
+    
 ## Credits
-bernard
+Bernard
 
 ## Tests
-some testing
+testing
 
----
+    
+## Questions
+[My gitHub](https://github.com/bernardjbs/)
 
-## Badges
 
-![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
+Should you have additional questions, you can email me at bernardjbs@yahoo.com and I will be glad to answer them
 
+    

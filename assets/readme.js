@@ -1,12 +1,21 @@
-const inquirer = require("inquirer");
-
-const buildReadme_part1 = (input) => {
+const buildTitle = (data) => {
     return `
+# ${data.title}
+`
+};
 
-# ${input.title}
+const buildLicenseBadge = (data) => {
+    const license = encodeURIComponent(data.license); 
+    console.log(data.license)
+    return`
+![License](https://img.shields.io/badge/License-${license}-blue)
+`  
+};
 
+const buildDescription = (data) => {
+    return `
 ## Description
-${input.description}
+${data.description}
 
 ## Table of Contents
 - [Description](#description)
@@ -16,34 +25,52 @@ ${input.description}
 - [Credits](#credits)
 - [Tests](#tests)
 `
-}
+};
 
-const buildReadme_part2 = (installations) => {
-    console.log(installations);
-    const ins = installations.reverse().map(i => `${i.installation} <br />![installation image](${i.imgSrc}) <br /> <br />`).join('');
-    return `## Instructions\n${ins}`;
-}
+const checkImg = (imageSrc) => {
+    if(imageSrc == "") {
+        imgLink = "";
+    }
+    else {
+        imgLink = `<br />![Image](${imageSrc})`;
+    }
+    return imgLink;
+};
 
-const buildReadme_part3 = (input) => {
+const buildInstallation = (data_arr) => {
+    const ins = data_arr.reverse().map(i => `${i.installation} ${checkImg(i.imgSrc)}<br /> <br />`).join('');
+    return `\n## Installation\n${ins}\n`;
+};
+
+const buildUsage = (data_arr) => {
+    const ins = data_arr.reverse().map(u => `${u.usage} ${checkImg(u.imgSrc)} <br /> <br />`).join('');
+    return `\n## Usage\n${ins}`;
+};
+
+const buildLicense = (data) => {
     return `
-## Usage
-${input.usage}
-
 ## License
-${input.license}
+Licensed under ${data.license}
+`
+};
 
+const buildCreditTest = (data) => {
+    return `
 ## Credits
-${input.credits}
+${data.credits}
 
 ## Tests
-${input.tests}
+${data.tests}
+`
+};
 
----
-
-## Badges
-
-![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
-
+const buildQuestions = (data) => {
+    return `
+## Questions
+![My gitHub](https://github.com/${data.username}/)
+\n
+Should you have additional questions, you can email me at ${data.email} and I will be glad to answer them
 `
 }
-module.exports = { buildReadme_part1, buildReadme_part2, buildReadme_part3 };
+module.exports = { buildTitle, buildLicenseBadge, buildDescription, buildInstallation, 
+    buildUsage, buildLicense, buildCreditTest, buildQuestions };
