@@ -1,9 +1,9 @@
 
 
-# Readme generator
+# title
 
 ## Description
-This is a professional readme generator
+desc
 
 ## Table of Contents
 - [Description](#description)
@@ -12,19 +12,18 @@ This is a professional readme generator
 - [License](#license)
 - [Credits](#credits)
 - [Tests](#tests)
-## Instructions
-step 1 <br />step 2 <br />step 3 <br />
+
 ## Usage
-some instructions
+usage
 
 ## License
 GPL-3.0
 
 ## Credits
-bernard - www.github.com/bernardjbs
+bernard
 
 ## Tests
-some testing
+tests
 ---
 
 ## Badges

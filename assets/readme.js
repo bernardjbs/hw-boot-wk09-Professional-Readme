@@ -20,10 +20,10 @@ ${input.description}
 }
 
 const buildReadme_part2 = (installations) => {
+    
     console.log(installations);
-    const ins = installations.map(i => `${i.installation} <br />`).join('');
-    // const tableOfContents = tocs.map(t => `${t.moreInstruction} <br />`).join('');
-    return `## Instructions\n${ins}`;
+//    const ins = installations.map(i => `${i.installation} <br />`).join('');
+//    return `## Instructions\n${ins}`;
 }
 
 const buildReadme_part3 = (input) =>  {
