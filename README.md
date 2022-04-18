@@ -7,12 +7,12 @@ This is a command line application that dynamically generates a professional rea
 
 ## Installation
 Packages to install: 
-<br>Inquirer npm
+<br>Inquirer npm - Used for command line interaction and interface
 
 ```
 npm install inquirer
 ```
-Sharp npm
+Sharp npm - Used to resize images
 ```
 npm install sharp
 ```
@@ -89,3 +89,8 @@ Please enter your GITHUB username:
 Please enter your EMAIL address:
 ```
 
+An example of the command prompt questionaire filled: 
+![Filled Prompt](./assets/images/readme_prompt.jpg)
+
+## Link to deployment application
+https://github.com/bernardjbs/hw-boot-wk09-Professional-Readme
