@@ -22,8 +22,6 @@ const confirmImg = () => {
     ]);
 };
 
-// Prompt user part 1: prompt for title and description
-
 const promptTitle = () => {
     return inquirer.prompt([
         {
@@ -83,7 +81,7 @@ const confirmUsage = () => {
     ]);
 };
 
-const chooseLicense = async () => {
+const chooseLicense = () => {
     return inquirer.prompt([
         {
             name: "license",
@@ -101,22 +99,47 @@ const chooseLicense = async () => {
     ]);
 };
 
-const promptCreditTest = async () => {
+const promptCredit = () => {
     return inquirer.prompt([
         {
-            name: "credits",
+            name: "credit",
             type: "input",
-            message: "List your collaborators + [LINK]"
-        },
+            message: "Please enter a collaborator:"
+        }
+    ]);
+};
+
+const confirmCredit = () => {
+    return inquirer.prompt([
         {
-            name: "tests",
+            name: "moreCredit",
+            type: "confirm",
+            message: "Add more collaborator?"
+        }
+    ]);
+};
+
+const promptTest = () => {
+    return inquirer.prompt([
+        {
+            name: "test",
             type: "input",
             message: "Please enter testing: "
         }
     ]);
 }
 
-const promptQuestions = async () => {
+const confirmTest = () => {
+    return inquirer.prompt([
+        {
+            name: "moreTest",
+            type: "confirm",
+            message: "Add more test examples?"
+        }
+    ]);
+};
+
+const promptQuestions = () => {
     return inquirer.prompt([
         {
             name: "username", 
@@ -179,14 +202,55 @@ const getUsageData = async () => {
     return usageArr;
 }
 
+let creditArr = [];
+const getCreditData = async () => {
+
+    const creditObj = {};
+    const promptCreditData = await promptCredit();
+
+    const getCreditConfirm = await confirmCredit();
+    if (getCreditConfirm.moreCredit == true) {
+        await getCreditData();
+    }
+    creditObj.credit = promptCreditData.credit;
+    creditArr.push(creditObj);
+    return creditArr;
+}
+
+let testArr = [];
+const getTestData = async () => {
+
+    const testObj = {};
+    const promptTestData = await promptTest();
+
+    const getImageConfirm = await confirmImg();
+    if (getImageConfirm.addImage == true) {
+        const promptImgData = await promptImg();
+        testObj.imgSrc = promptImgData.image;
+    }
+    else {
+        testObj.imgSrc = "";
+    }
+
+    const getTestConfirm = await confirmTest();
+    if (getTestConfirm.moreTest == true) {
+        await getTestData();
+    }
+    testObj.test = promptTestData.test;
+    testArr.push(testObj);
+
+    return testArr;
+}
+
 const init = async () => {
     const titleData = await promptTitle()
     const descData = await promptDesc()
     const installData_arr = await getInstallData();
     const usageData_arr = await getUsageData();
-    const licenseData = await chooseLicense()
-    const creditTestData = await promptCreditTest()
-    const questionsData = await promptQuestions()
+    const licenseData = await chooseLicense();
+    const creditData = await getCreditData();
+    const testData = await getTestData();
+    const questionsData = await promptQuestions();
 
     const buildTitle = readme.buildTitle(titleData);
     const buildLicenseBadge = readme.buildLicenseBadge(licenseData);
@@ -194,7 +258,8 @@ const init = async () => {
     const buildInstallation = readme.buildInstallation(installData_arr); 
     const buildUsage = readme.buildUsage(usageData_arr);
     const buildLicense = readme.buildLicense(licenseData);
-    const buildCreditTest = readme.buildCreditTest(creditTestData);
+    const buildCredit = readme.buildCredit(creditData);
+    const buildTest = readme.buildTest(testData);
     const buildQuestions = readme.buildQuestions(questionsData);
 
     let join = `
@@ -204,9 +269,11 @@ const init = async () => {
     ${buildInstallation}
     ${buildUsage}
     ${buildLicense}
-    ${buildCreditTest}
+    ${buildCredit}
+    ${buildTest}
     ${buildQuestions}
     `;
-    fs.writeFileSync("README.md", join);
+
+    fs.writeFileSync("./README.md", join);
 }
 init();

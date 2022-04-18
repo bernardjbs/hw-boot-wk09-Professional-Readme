@@ -1,13 +1,13 @@
 
     
-# A readme generator
+# title
 
     
-![License](https://img.shields.io/badge/License-BSD%202%20Clause-blue)
+![License](https://img.shields.io/badge/License-GPL%203.0-blue)
 
     
 ## Description
-This readme generator is cool and is pro!! 
+desc
 
 ## Table of Contents
 - [Description](#description)
@@ -16,25 +16,25 @@ This readme generator is cool and is pro!!
 - [License](#license)
 - [Credits](#credits)
 - [Tests](#tests)
+- [Questions](#questions)
 
     
 ## Installation
-step 1 <br />![Image](./assets/images/installation_01.jpg)<br /> <br />Step 2 <br /> <br />
+s1 <br />![Image](./assets/images/installation_02.jpg)<br /> <br />
 
     
 ## Usage
-Usage 1 <br />![Image](./assets/images/usage_01.jpg) <br /> <br />
+u1 <br />![Image](./assets/images/installation_02.jpg) <br /> <br />
     
 ## License
-Licensed under BSD 2 Clause
+Licensed under GPL 3.0
 
     
-## Credits
-Bernard
-
+## Credit
+john <br /> <br />bernard <br /> <br />sally <br /> <br />
+    
 ## Tests
-testing
-
+test 1 <br />![Image](./assets/images/installation_02.jpg) <br /> <br />test 2 <br />![Image](./assets/images/installation_02.jpg) <br /> <br />
     
 ## Questions
 [My gitHub](https://github.com/bernardjbs/)

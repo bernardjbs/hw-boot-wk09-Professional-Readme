@@ -1,3 +1,19 @@
+const sharp = require("sharp");
+sharp.cache(false);
+
+async function resizeFile(path) {
+    try {
+        let buffer = await sharp(path)
+        .resize({ width: 650 })
+        .toBuffer();
+        return sharp(buffer).toFile(path);
+    
+    }
+    catch(err) {
+        console.error(err);
+    }
+}
+
 const buildTitle = (data) => {
     return `
 # ${data.title}
@@ -6,7 +22,6 @@ const buildTitle = (data) => {
 
 const buildLicenseBadge = (data) => {
     const license = encodeURIComponent(data.license); 
-    console.log(data.license)
     return`
 ![License](https://img.shields.io/badge/License-${license}-blue)
 `  
@@ -24,6 +39,7 @@ ${data.description}
 - [License](#license)
 - [Credits](#credits)
 - [Tests](#tests)
+- [Questions](#questions)
 `
 };
 
@@ -32,6 +48,7 @@ const checkImg = (imageSrc) => {
         imgLink = "";
     }
     else {
+        resizeFile(imageSrc);
         imgLink = `<br />![Image](${imageSrc})`;
     }
     return imgLink;
@@ -54,23 +71,23 @@ Licensed under ${data.license}
 `
 };
 
-const buildCreditTest = (data) => {
-    return `
-## Credits
-${data.credits}
+const buildCredit = (data_arr) => {
+    const ins = data_arr.reverse().map(c => `${c.credit} <br />`).join('');
+    return `\n## Credit\n${ins}`;
+};
 
-## Tests
-${data.tests}
-`
+const buildTest = (data_arr) => {
+    console.log(data_arr);
+    const ins = data_arr.reverse().map(t => `${t.test} ${checkImg(t.imgSrc)} <br /> <br />`).join('');
+    return `\n## Tests\n${ins}`;
 };
 
 const buildQuestions = (data) => {
     return `
 ## Questions
-![My gitHub](https://github.com/${data.username}/)
+[My gitHub](https://github.com/${data.username}/)
 \n
 Should you have additional questions, you can email me at ${data.email} and I will be glad to answer them
 `
 }
-module.exports = { buildTitle, buildLicenseBadge, buildDescription, buildInstallation, 
-    buildUsage, buildLicense, buildCreditTest, buildQuestions };
+module.exports = { buildTitle, buildLicenseBadge, buildDescription, buildInstallation, buildUsage, buildLicense, buildCredit, buildTest, buildQuestions };
