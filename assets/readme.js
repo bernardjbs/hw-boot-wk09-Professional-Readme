@@ -1,8 +1,7 @@
 const inquirer = require("inquirer");
 
-const buildReadme_part1 = (input) =>
-{
-return `
+const buildReadme_part1 = (input) => {
+    return `
 
 # ${input.title}
 
@@ -20,14 +19,13 @@ ${input.description}
 }
 
 const buildReadme_part2 = (installations) => {
-    
     console.log(installations);
-//    const ins = installations.map(i => `${i.installation} <br />`).join('');
-//    return `## Instructions\n${ins}`;
+    const ins = installations.reverse().map(i => `${i.installation} <br />![installation image](${i.imgSrc}) <br /> <br />`).join('');
+    return `## Instructions\n${ins}`;
 }
 
-const buildReadme_part3 = (input) =>  {
-return `
+const buildReadme_part3 = (input) => {
+    return `
 ## Usage
 ${input.usage}
 
@@ -39,6 +37,7 @@ ${input.credits}
 
 ## Tests
 ${input.tests}
+
 ---
 
 ## Badges

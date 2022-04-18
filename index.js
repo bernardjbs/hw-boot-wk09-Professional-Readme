@@ -3,7 +3,7 @@ const inquirer = require("inquirer");
 const readme = require("./assets/readme")
 
 // Prompt user part 1: prompt for title and description
-const promtUser_part1 = () => {
+const getInputData01 = () => {
     return inquirer.prompt([
         {
             name: "title",
@@ -48,7 +48,6 @@ const confirmInstallation = () => {
         }
     ])
 }
-// Prompt user part 2: Installation
 const promtInstallation = () => {
     return inquirer.prompt([
         {
@@ -59,7 +58,7 @@ const promtInstallation = () => {
     ])
 }
 
-const promtUser_part3 = () => {
+const getInputData02 = () => {
     return inquirer.prompt([
         {
             name: "usage",
@@ -92,11 +91,11 @@ const promtUser_part3 = () => {
     ])
 }
 
+
 let installArr = [];
+const getInstallData = async () => {
 
-const getInstall = async () => {
     const installObj = {};
-
     const promptInstallData = await promtInstallation();
 
     const getImageConfirm = await confirmImg();
@@ -110,38 +109,24 @@ const getInstall = async () => {
 
     const getInstallConfirm = await confirmInstallation();
     if (getInstallConfirm.moreInstallation == true) {
-        await getInstall();
+        await getInstallData();
     }
-    installObj.intallation = promptInstallData.installation;
-
+    installObj.installation = promptInstallData.installation;
     installArr.push(installObj);
-    // console.log(getImageConfirm.addImage);
-    // console.log(getInstallConfirm.moreInstallation);
-    //console.log(installArr);
-
     return installArr;
 }
 
 const init = async () => {
-    const input_01 = await promtUser_part1();
-
-
-    input_02_arr = await getInstall();
-
-
-    // const input_02 = [await promtUser_part2()];
-    // while(input_02.slice(-1)[0].moreInstruction == true) {
-    //     const inputNextIns = await promtUser_part2();
-    //     input_02.push(inputNextIns);
-    // }
-    const input_03 = await promtUser_part3();
+    const input_01 = await getInputData01();
+    input_02_arr = await getInstallData();
+    const input_03 = await getInputData02();
 
     const generateReadme_part1 = readme.buildReadme_part1(input_01);
     const generateReadme_part2 = readme.buildReadme_part2(input_02_arr);
     const generateReadme_part3 = readme.buildReadme_part3(input_03);
 
     fs.writeFileSync("README.md", generateReadme_part1);
-    //fs.appendFileSync("README.md", generateReadme_part2);
+    fs.appendFileSync("README.md", generateReadme_part2);
     fs.appendFileSync("README.md", generateReadme_part3);
 }
 init();

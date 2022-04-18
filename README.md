@@ -1,9 +1,9 @@
 
 
-# title
+# Readme generator
 
 ## Description
-desc
+this is a professional readme generator
 
 ## Table of Contents
 - [Description](#description)
@@ -12,18 +12,20 @@ desc
 - [License](#license)
 - [Credits](#credits)
 - [Tests](#tests)
-
+## Instructions
+1 <br />![installation image](./assets/images/installation_01.jpg) <br /> <br />2 <br />![installation image](./assets/images/installation_02.jpg) <br /> <br />3 <br />![installation image](./assets/images/installation_03.jpg) <br /> <br />
 ## Usage
-usage
+some usage instructions
 
 ## License
-GPL-3.0
+BSD-2-Clause
 
 ## Credits
 bernard
 
 ## Tests
-tests
+some testing
+
 ---
 
 ## Badges
