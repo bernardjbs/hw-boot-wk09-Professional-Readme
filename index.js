@@ -2,12 +2,13 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 const readme = require("./assets/readme");
 
+// Prompts
 const promptImg = () => {
     return inquirer.prompt([
         {
             name: "image",
             type: "input",
-            message: "Please enter the file path of the image: "
+            message: "Please enter the file path of the image:"
         }
     ]);
 };
@@ -27,7 +28,7 @@ const promptTitle = () => {
         {
             name: "title",
             type: "input",
-            message: "Enter Title"
+            message: "Please enter a TITLE for your project:"
         }
     ]);
 };
@@ -37,7 +38,7 @@ const promptDesc = () => {
         {
             name: "description",
             type: "input",
-            message: "Enter Description"
+            message: "Please enter a DESCRIPTION for your project:"
         },
     ]);
 };
@@ -47,7 +48,7 @@ const promptInstallation = () => {
         {
             name: "installation",
             type: "input",
-            message: "Please enter the steps to install your project:"
+            message: "Please enter the steps to INSTALL your project:"
         }
     ]);
 };
@@ -57,7 +58,7 @@ const confirmInstallation = () => {
         {
             name: "moreInstallation",
             type: "confirm",
-            message: "Add more installation instruction?"
+            message: "Do you wish to ADD MORE INSTALLATION instructions?"
         }
     ]);
 };
@@ -67,7 +68,7 @@ const promptUsage = () => {
         {
             name: "usage",
             type: "input",
-            message: "Please provide instructions and examples for use:"
+            message: "Please provide instructions and examples how to USE your application:"
         }
     ]);
 };
@@ -76,7 +77,7 @@ const confirmUsage = () => {
         {
             name: "moreUsage",
             type: "confirm",
-            message: "Add more usage instruction?"
+            message: "Do you wish to add more USAGE instruction?"
         }
     ]);
 };
@@ -86,7 +87,7 @@ const chooseLicense = () => {
         {
             name: "license",
             type: "list",
-            message: "Please choose a license for your project:",
+            message: "Please choose a LICENSE for your project:",
             choices: [
                 "MIT",
                 "Apache 2.0",
@@ -104,7 +105,7 @@ const promptCredit = () => {
         {
             name: "credit",
             type: "input",
-            message: "Please enter a collaborator:"
+            message: "Please enter a COLLABORATOR:"
         }
     ]);
 };
@@ -114,7 +115,7 @@ const confirmCredit = () => {
         {
             name: "moreCredit",
             type: "confirm",
-            message: "Add more collaborator?"
+            message: "Do you wiwh to add more COLLABORATOR?"
         }
     ]);
 };
@@ -124,7 +125,7 @@ const promptTest = () => {
         {
             name: "test",
             type: "input",
-            message: "Please enter testing: "
+            message: "Please enter TEST run:"
         }
     ]);
 }
@@ -134,7 +135,7 @@ const confirmTest = () => {
         {
             name: "moreTest",
             type: "confirm",
-            message: "Add more test examples?"
+            message: "Would you like to add more TEST run?"
         }
     ]);
 };
@@ -144,19 +145,19 @@ const promptQuestions = () => {
         {
             name: "username", 
             type: "input", 
-            message: "Please enter your github username:"
+            message: "Please enter your GITHUB username:"
         },
         {
             name: "email", 
             type: "input",
-            message: "Please enter your email address:"
+            message: "Please enter your EMAIL address:"
         }
     ]);
 }
 
+// Function to get installation data with options to add image
 let installArr = [];
 const getInstallData = async () => {
-
     const installObj = {};
     const promptInstallData = await promptInstallation();
 
@@ -178,9 +179,9 @@ const getInstallData = async () => {
     return installArr;
 }
 
+// Function to get usage data with options to add image
 let usageArr = [];
 const getUsageData = async () => {
-
     const usageObj = {};
     const promptUsageData = await promptUsage();
 
@@ -202,9 +203,9 @@ const getUsageData = async () => {
     return usageArr;
 }
 
+// Function to get collaborators data
 let creditArr = [];
 const getCreditData = async () => {
-
     const creditObj = {};
     const promptCreditData = await promptCredit();
 
@@ -217,9 +218,9 @@ const getCreditData = async () => {
     return creditArr;
 }
 
+// Function to get tests data with options to add image
 let testArr = [];
 const getTestData = async () => {
-
     const testObj = {};
     const promptTestData = await promptTest();
 
@@ -242,6 +243,7 @@ const getTestData = async () => {
     return testArr;
 }
 
+// Function to get the data from prompts to build the string for the readme. Then create the Readme file 
 const init = async () => {
     const titleData = await promptTitle()
     const descData = await promptDesc()
@@ -262,6 +264,7 @@ const init = async () => {
     const buildTest = readme.buildTest(testData);
     const buildQuestions = readme.buildQuestions(questionsData);
 
+    // Join string
     let join = `
     ${buildTitle}
     ${buildLicenseBadge}
@@ -274,6 +277,7 @@ const init = async () => {
     ${buildQuestions}
     `;
 
-    fs.writeFileSync("./README.md", join);
+    // Create readme file
+    fs.writeFileSync("./NEW_README.md", join);
 }
 init();
